@@ -1,4 +1,4 @@
-# dimple
+# Turtle: A damn simple habit tracker
 
 A new Flutter project.
 
