@@ -6,6 +6,9 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Center(
+        child: Text("Settings Page"),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.back(),
         backgroundColor: Colors.indigo[900],

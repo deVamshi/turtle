@@ -157,40 +157,11 @@ class _HomePageState extends State<HomePage> {
                   ? Center(
                       child: Icon(FontAwesomeIcons.check),
                     )
-                  : Dismissible(
-                      key: UniqueKey(),
-                      secondaryBackground: Container(
-                        color: Colors.red,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Icon(
-                              FontAwesomeIcons.frown,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      background: Container(
-                        color: Colors.green,
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Icon(
-                                FontAwesomeIcons.smileBeam,
-                                color: Colors.white,
-                              ),
-                            )),
-                      ),
-                      onDismissed: (direction) {},
-                      child: HabitComponent(
-                        text: habits[index]['text'],
-                        selectedColor: habits[index]['selectedColor'],
-                        icon: habits[index]['icon'],
-                        toEdit: false,
-                      ),
+                  : HabitComponent(
+                      text: habits[index]['text'],
+                      selectedColor: habits[index]['selectedColor'],
+                      icon: habits[index]['icon'],
+                      toEdit: false,
                     );
             },
             // shrinkWrap: true,
