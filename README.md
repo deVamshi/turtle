@@ -1,16 +1,16 @@
-# Turtle: A damn simple habit tracker
+# Turtle - A damn simple habit tracker
 
-A new Flutter project.
+ ### 👨‍💻  Author
 
-## Getting Started
+UI developed by deVamshidhar
 
-This project is a starting point for a Flutter application.
+### Contact me:
 
-A few resources to get you started if this is your first Flutter project:
+* [LinkedIn](https://www.linkedin.com/in/vamshidhar-telugu-b10259181)
+* Leave a mail at dev.vamshidhar@gmail.com
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### 💻  Requirements :alien:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Any Operating System (MacOS, Linux, Windows)
+* Any IDE with Flutter SDK installed (Android Studio, VSCode etc)
+* A little knowledge of Dart and Flutter
