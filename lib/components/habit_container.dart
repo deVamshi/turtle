@@ -1,19 +1,14 @@
 import 'package:dimple/screens/detail_habit_page.dart';
+import 'package:dimple/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
 class HabitComponent extends StatelessWidget {
-  HabitComponent(
-      {@required this.text,
-      @required this.selectedColor,
-      @required this.icon,
-      this.toEdit});
+  HabitComponent({this.habit, this.toEdit});
 
-  Color selectedColor;
-  String text;
-  IconData icon;
+  HabitModel habit;
   bool toEdit = false;
   @override
   Widget build(BuildContext context) {
@@ -23,8 +18,8 @@ class HabitComponent extends StatelessWidget {
         onTap: () {
           Get.to(
             DetailHabitPage(
-              title: text,
-              icon: icon,
+              title: habit.name,
+              icon: habit.icon,
             ),
           );
         },
@@ -32,15 +27,16 @@ class HabitComponent extends StatelessWidget {
         leading: Container(
           height: 50,
           child: Icon(
-            icon,
+            habit.icon,
             color: Colors.white,
           ),
           width: 50,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15), color: selectedColor),
+              borderRadius: BorderRadius.circular(15),
+              color: habit.selectedColor),
         ),
         title: Text(
-          text,
+          habit.name,
           style: GoogleFonts.roboto(
             fontWeight: FontWeight.w600,
             fontSize: 20,
