@@ -1,5 +1,6 @@
 import 'package:blobs/blobs.dart';
 import 'package:dimple/components/habit_container.dart';
+import 'package:dimple/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,44 +12,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextStyle buildTextStyle(double size) {
+  TextStyle buildTextStyle({double fontSize}) {
     return GoogleFonts.roboto(
       fontWeight: FontWeight.bold,
       color: Colors.grey,
-      fontSize: size,
+      fontSize: fontSize,
     );
   }
 
-  List<Map<String, dynamic>> habits = [
-    {
-      'text': "Drink enough water",
-      "icon": FontAwesomeIcons.water,
-      "selectedColor": Colors.blue
-    },
-    {
-      'text': "Take pills",
-      "icon": FontAwesomeIcons.grinWink,
-      "selectedColor": Colors.amber
-    },
-    {
-      'text': "Code Daily",
-      "icon": FontAwesomeIcons.keyboard,
-      "selectedColor": Colors.red
-    },
-    {
-      'text': "No Social Media",
-      "icon": FontAwesomeIcons.facebook,
-      "selectedColor": Colors.pink
-    },
+  List<HabitModel> habits = [
+    HabitModel(
+        name: "Drink enough water",
+        icon: FontAwesomeIcons.water,
+        selectedColor: Colors.blue),
+    HabitModel(
+        name: "Take Pills",
+        icon: FontAwesomeIcons.grinWink,
+        selectedColor: Colors.amber),
+    HabitModel(
+        name: "Code Daily",
+        icon: FontAwesomeIcons.keyboard,
+        selectedColor: Colors.red),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 30,
-        ),
+        const SizedBox(height: 30),
         Center(
           child: Text(
             "Today",
@@ -64,15 +55,15 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () {},
               child: Text(
-                "17",
-                style: buildTextStyle(16),
+                Helpers.yesterdayDate(isDayBefore: true).day.toString(),
+                style: buildTextStyle(fontSize: 16),
               ),
             ),
             TextButton(
               onPressed: () {},
               child: Text(
-                "18",
-                style: buildTextStyle(18),
+                Helpers.yesterdayDate().day.toString(),
+                style: buildTextStyle(fontSize: 18),
               ),
             ),
             Blob.fromID(
@@ -95,58 +86,56 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () {},
               child: Text(
-                "18",
-                style: buildTextStyle(18),
+                Helpers.tomorrowDate().day.toString(),
+                style: buildTextStyle(fontSize: 18),
               ),
             ),
             TextButton(
               onPressed: () {},
               child: Text(
-                "17",
-                style: buildTextStyle(16),
+                Helpers.tomorrowDate(isDayAfter: true).day.toString(),
+                style: buildTextStyle(fontSize: 16),
               ),
             ),
           ],
         ),
         Center(
           child: Text(
-            'Febraury',
+            Helpers.returnMonth(
+              DateTime.now(),
+            ),
             style: GoogleFonts.roboto(
               fontSize: 13,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15,
-          ),
-          child: StepProgressIndicator(
-            totalSteps: 4,
-            currentStep: 3,
-            size: 15,
-            padding: 0,
-            selectedColor: Colors.yellow,
-            unselectedColor: Colors.cyan,
-            roundedEdges: Radius.circular(100),
-            selectedGradientColor: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.indigo[900], Colors.purple],
-            ),
-            unselectedGradientColor: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.grey[100], Colors.grey[100]],
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
+        const SizedBox(height: 20),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(
+        //     horizontal: 15,
+        //   ),
+        //   child: StepProgressIndicator(
+        //     totalSteps: 4,
+        //     currentStep: 3,
+        //     size: 15,
+        //     padding: 0,
+        //     selectedColor: Colors.yellow,
+        //     unselectedColor: Colors.cyan,
+        //     roundedEdges: Radius.circular(100),
+        //     selectedGradientColor: LinearGradient(
+        //       begin: Alignment.topLeft,
+        //       end: Alignment.bottomRight,
+        //       colors: [Colors.indigo[900], Colors.purple],
+        //     ),
+        //     unselectedGradientColor: LinearGradient(
+        //       begin: Alignment.topLeft,
+        //       end: Alignment.bottomRight,
+        //       colors: [Colors.grey[100], Colors.grey[100]],
+        //     ),
+        //   ),
+        // ),
+        const SizedBox(height: 10),
         Expanded(
             child: Container(
           // color: Colors.blue,
@@ -158,9 +147,7 @@ class _HomePageState extends State<HomePage> {
                       child: Icon(FontAwesomeIcons.check),
                     )
                   : HabitComponent(
-                      text: habits[index]['text'],
-                      selectedColor: habits[index]['selectedColor'],
-                      icon: habits[index]['icon'],
+                      habit: mockHabitsData[index],
                       toEdit: false,
                     );
             },
@@ -172,3 +159,26 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+class HabitModel {
+  String name;
+  IconData icon;
+  Color selectedColor;
+
+  HabitModel({this.name, this.icon, this.selectedColor});
+}
+
+List<HabitModel> mockHabitsData = [
+  HabitModel(
+      name: "Drink enough water",
+      icon: FontAwesomeIcons.water,
+      selectedColor: Colors.blue),
+  HabitModel(
+      name: "Take Pills",
+      icon: FontAwesomeIcons.grinWink,
+      selectedColor: Colors.amber),
+  HabitModel(
+      name: "Code Daily",
+      icon: FontAwesomeIcons.keyboard,
+      selectedColor: Colors.red),
+];

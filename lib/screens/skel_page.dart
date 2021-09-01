@@ -1,4 +1,5 @@
 import 'package:dimple/screens/create_habit_page.dart';
+import 'package:dimple/screens/four_o_four.view.dart';
 import 'package:dimple/screens/home_page.dart';
 import 'package:dimple/screens/all_habits_page.dart';
 import 'package:dimple/screens/settings_page.dart';
@@ -8,6 +9,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class Skel extends StatelessWidget {
+  void goToScreenWithIndex(int selectedIndex) {
+    Widget screen;
+    switch (selectedIndex) {
+      case 0:
+        screen = AllHabitsPage();
+        break;
+      case 1:
+        screen = SettingsPage();
+        break;
+      default:
+        screen = FouroFourView();
+    }
+    Get.to(() => screen);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,21 +36,11 @@ class Skel extends StatelessWidget {
             FontAwesomeIcons.plus,
             color: Colors.grey[100],
           ),
-          onPressed: () {
-            Get.to(CreateHabitPage());
-          },
+          onPressed: () => Get.to(() => CreateHabitPage()),
         ),
         body: HomePage(),
         bottomNavigationBar: BottomNavigationBar(
-          onTap: (value) {
-            if (value == 0) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AllHabitsPage()));
-            } else {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SettingsPage()));
-            }
-          },
+          onTap: goToScreenWithIndex,
           iconSize: 20,
           backgroundColor: Colors.transparent,
           elevation: 0.0,
